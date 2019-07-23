@@ -1,0 +1,132 @@
+swagger: '2.0'
+info:
+  description: >-
+    This is a sample server Petstore server.  You can find out more about    
+    Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net,
+    #swagger](http://swagger.io/irc/).      For this sample, you can use the api
+    key `special-key` to test the authorization     filters.
+  version: 1.0.0
+  title: Swagger Petstore
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: petstore.swagger.io
+basePath: /v2
+tags:
+  - name: stock
+    description: Everything about your Stocks
+    externalDocs:
+      description: Find out more
+      url: 'http://test.io'
+schemes:
+  - https
+  - http
+produces:
+  - application/json
+paths:
+  /stock:
+    post:
+      tags:
+        - stock
+      summary: Add a new Stock to the store
+      description: ''
+      operationId: addStock
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Stock object that needs to be added to the DB
+          required: true
+          schema:
+            $ref: '#/definitions/Stock'
+      responses:
+        '400':
+          description: Invalid input
+    get:
+      tags:
+        - stock
+      summary: List stocks
+      description: ''
+      operationId: listStock
+      parameters:
+        - in: header
+          name: name
+          type: string
+          description: partial name of the stock
+          required: false
+      responses:
+        '200':
+          description: success on listing stocks
+          headers:
+            X-Request-Id:
+              type: string
+              format: uuid
+              description: request id
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/StockView'
+definitions:
+  Stock:
+    type: object
+    description: stock model
+    properties:
+      name:
+        type: string
+        description: stock model
+        example: XYZ
+      points:
+        type: integer
+        description: points to increase
+      isImportant:
+        type: boolean
+        description: checks if the stock is important
+    required:
+      - name
+      - points
+  StockView:
+    type: object
+    description: stock model
+    properties:
+      name:
+        type: string
+        description: stock model
+        example: XYZ
+      points:
+        type: integer
+        description: points to increase
+      isEnabled:
+        type: boolean
+        description: checks if the stock is enabled
+      region:
+        type: string
+        description: region
+        example: US
+      audit:
+        $ref: '#/definitions/Audit'
+    required:
+      - name
+      - audit
+  Audit:
+    type: object
+    description: audit on the stock view
+    properties:
+      created_at:
+        title: Created At
+        description: when the object is created
+        type: string
+        readOnly: true
+        format: date-time
+      updated_at:
+        title: Created At
+        description: when the object is created
+        type: string
+        readOnly: true
+        format: date-time
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'

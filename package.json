@@ -1,0 +1,47 @@
+{
+    "name": "simpleexchange",
+    "description": "",
+    "version": "1.0.0",
+    "author": "s <s>",
+    "contributors": [],
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/s/simpleexchange.git"
+    },
+    "bugs": "http://github.com/s/simpleexchange/issues",
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org"
+    },
+    "dependencies": {
+        "axios": "^0.19.0",
+        "boom": "^7.1.1",
+        "hapi": "^17.0.0",
+        "hapi-openapi": "^1.0.0",
+        "knex": "^0.19.0",
+        "lodash": "^4.17.15",
+        "mysql": "^2.17.0",
+        "nock": "^10.0.6",
+        "nyc": "^14.1.1",
+        "rc": "^1.2.8",
+        "winston": "^3.2.1"
+    },
+    "devDependencies": {
+        "ava": "^2.2.0",
+        "eslint": "^2",
+        "istanbul": "~0.4.3",
+        "sinon": "^7.3.2",
+        "swagmock": "^1.0.0",
+        "tape": "^4"
+    },
+    "scripts": {
+        "test": "ava --verbose",
+        "cover": "npx nyc npm run test",
+        "lint": "eslint .",
+        "regenerate": "yo swaggerize:test --framework hapi --apiPath './config/swagger.yaml'",
+        "dev": "node server"
+    },
+    "generator-swaggerize": {
+        "version": "4.1.0"
+    },
+    "main": "./server"
+}
